@@ -14,7 +14,7 @@ We propose state of the art models for different RF impairments models
 
 ## Documentation 
 
-- [ ] To do ! 
+Documentation can be found [here](https://juliatelecom.github.io/RFImpairmentsModels.jl/dev/index.html) and have been generated with Documenter.
 
 
 ## Installation 
