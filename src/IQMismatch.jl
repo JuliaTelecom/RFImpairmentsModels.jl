@@ -25,7 +25,13 @@ end
 
 """ Convert log in linear scale
 """
-db_to_linear(gdb) = 10^(gdb/10)
+function db_to_linear(gdb) 
+    if gdb == -Inf 
+        return 0
+    else 
+        return 10^(gdb/10)
+    end
+end
 
 
 """ Apply IQ Mismatch to complex input signal x parametrized by the gain mismtach g (in dB) and the phase mismatch ϕ.
