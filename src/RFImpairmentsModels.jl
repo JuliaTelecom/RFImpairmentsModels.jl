@@ -1,4 +1,4 @@
-module RFFingerprintModels
+module RFImpairmentsModels
 
 # ----------------------------------------------------
 # --- Dependencies
