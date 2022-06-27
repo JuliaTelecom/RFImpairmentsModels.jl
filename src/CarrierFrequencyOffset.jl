@@ -30,13 +30,13 @@ There are 3 versions
 - One without allocation and mutation of first input : addCFO!(y,x,...)
 - One with in place location of input addCFO!(x,...)
 """ 
-function addCFO(x::Union{AbstractVector{Complex{T}},AbstractVector{T}},δ,fs,ϕ=0) where T
+function addCFO(x::Union{AbstractVector{Complex{T}},AbstractVector{T}},δ,fs,ϕ=0) where {T<:Real}
     y = zeros(Complex{T},length(x))
     addCFO!(y,x,δ,fs,ϕ)
     return y
 end
 
-function addCFO!(y::AbstractVector{Complex{T}},x::AbstractVector,δ::Number,fs::Number,ϕ=0) where T
+function addCFO!(y::AbstractVector{Complex{T}},x::AbstractVector,δ::Number,fs::Number,ϕ=0) where {T<:Real}
     # --- Basic array check 
     @assert length(x) == length(y) "Input and output should have same length (here input x is $(length(x)) and pre-allocated output has size $(length(y))"
     # --- CFO pulsation 
@@ -46,12 +46,12 @@ function addCFO!(y::AbstractVector{Complex{T}},x::AbstractVector,δ::Number,fs::
         y[n] = x[n] * Complex{T}(exp(2im*π*ω*( (n-1) + ϕ)))
     end
 end
-function addCFO!(x::AbstractVector{Complex{T}},δ::Number,fs::Number,ϕ=0) where T
+function addCFO!(x::AbstractVector{Complex{T}},δ::Number,fs::Number,ϕ=0) where {T<:Real}
     addCFO!(x,x,δ,fs,ϕ)
 end
 
 
-function addCFO(x::Union{AbstractVector{Complex{T}},AbstractVector{T}},cfo::CFO) where T
+function addCFO(x::Union{AbstractVector{Complex{T}},AbstractVector{T}},cfo::CFO) where  {T<:Real}
     y = zeros(Complex{T},length(x))
     addCFO!(y,x,cfo)
     return y
