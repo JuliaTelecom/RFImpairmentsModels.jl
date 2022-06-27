@@ -1,5 +1,7 @@
 # RFImpairmentsModels 
 
+[![](https://img.shields.io/badge/docs-stable-blue.svg)](https://juliatelecom.github.io/RFImpairmentsModels.jl/dev/index.html)
+
 ## Purpose 
 
 This Julia package aims to propose digital baseband models for Radio Frequency (RF) impairments. These models are useful for Physical layer design  as a digital receiver chain requires often digital compensation of the impairments from both the transmitter and the receiver sides.
