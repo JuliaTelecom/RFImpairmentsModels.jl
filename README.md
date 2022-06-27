@@ -1,4 +1,4 @@
-# RFImpairmentsModels 
+# RFImpairmentsModels.jl
 
 [![](https://img.shields.io/badge/docs-stable-blue.svg)](https://juliatelecom.github.io/RFImpairmentsModels.jl/dev/index.html)
 
