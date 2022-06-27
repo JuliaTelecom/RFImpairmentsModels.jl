@@ -1,6 +1,8 @@
 # RFImpairmentsModels.jl
 
 [![](https://img.shields.io/badge/docs-stable-blue.svg)](https://juliatelecom.github.io/RFImpairmentsModels.jl/dev/index.html)
+[![.github/workflows/Test.yml](https://github.com/JuliaTelecom/RFImpairmentsModels.jl/actions/workflows/Test.yml/badge.svg)](https://github.com/JuliaTelecom/RFImpairmentsModels.jl/actions/workflows/Test.yml)
+
 
 ## Purpose 
 
