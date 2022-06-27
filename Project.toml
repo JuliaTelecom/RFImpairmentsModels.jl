@@ -1,4 +1,4 @@
-name = "RFFingerprintModels"
+name = "RFImpairmentsModels"
 uuid = "9896bf05-9493-4e5b-be64-41b6a423b7e2"
 authors = ["Robin Gerzaguet <robin.gerzaguet@irisa.fr> and contributors"]
 version = "0.1.0"

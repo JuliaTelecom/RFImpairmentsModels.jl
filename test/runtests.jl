@@ -1,4 +1,4 @@
-using RFFingerprintModels
+using RFImpairmentsModels
 using Test
 using Statistics 
 using DSP
