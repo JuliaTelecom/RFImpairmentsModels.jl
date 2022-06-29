@@ -31,6 +31,7 @@ end
 
 
 @testset "Phase Noise" begin 
+    # --- Wiener phase noise 
     pn = initPhaseNoise(:Wiener;seed=1234,σ2=0)
     x = randn(Float64,512) 
     y = addPhaseNoise(x,pn)
@@ -46,6 +47,13 @@ end
     end
     addPhaseNoise!(y,pn)
     @test y isa Vector{ComplexF64}
+    # No phase noise model 
+    pn = initPhaseNoise(:None;seed=1234,σ2=0)
+    x = randn(Float64,512) 
+    y = addPhaseNoise(x,pn)
+    @test x == y
+
+
 end
 
 @testset "Testing addCFO.jl..." begin

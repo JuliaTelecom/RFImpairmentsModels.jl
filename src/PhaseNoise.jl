@@ -11,6 +11,10 @@ mutable struct WienerPhaseNoise_1 <: PhaseNoiseModel
 end
 WienerPhaseNoise = WienerPhaseNoise_1 # For Revise
 
+
+mutable struct NoPhaseNoise <: PhaseNoiseModel
+end
+
 """ Instantiate a phase noise model, with specific model and associated parameters
 - Wiener => Wiener phase noise parametrized by the normalized state noise variance 
 """
@@ -18,7 +22,9 @@ function initPhaseNoise(model::Symbol;σ2=0,seed=-1)
     if model == :Wiener 
         # --- Instantiate the PN 
         pn = WienerPhaseNoise(σ2,seed,0,0)
-    else 
+    elseif model == :None 
+        pn = NoPhaseNoise()
+    else
         @error "Unknown Phase noise model" 
     end
     return pn 
@@ -51,6 +57,11 @@ function addPhaseNoise!(y::AbstractVector{Complex{T}},x,pn::PhaseNoiseModel) whe
         # --- Update Wiener structure 
         pn.ϕ̄ = ϕ̄
         pn.counter += length(x)
+    elseif pn isa NoPhaseNoise
+        # --- Simple copy
+        @inbounds @simd for n ∈ eachindex(x)
+            y[n]    = x[n] 
+        end 
     end
 end
 function addPhaseNoise(x::Union{AbstractVector{Complex{T}},AbstractVector{T}},pn::PhaseNoiseModel) where T
