@@ -4,6 +4,7 @@
 abstract type PhaseNoiseModel end
 
 mutable struct WienerPhaseNoise <: PhaseNoiseModel 
+    name::Symbol
     σ2::Float64      # State Noise variance 
     seed::Int64     # Seed for PN Variation 
     ϕ̄::Float64      # Current phase value (for continuity call)
@@ -11,6 +12,7 @@ mutable struct WienerPhaseNoise <: PhaseNoiseModel
 end
 
 mutable struct NoPhaseNoise <: PhaseNoiseModel
+    name::Symbol
 end
 
 """ Instantiate a phase noise model, with specific model and associated parameters
@@ -20,9 +22,9 @@ end
 function initPhaseNoise(model::Symbol;σ2=0,seed=-1)
     if model == :Wiener 
         # --- Instantiate the PN 
-        pn = WienerPhaseNoise(σ2,seed,0,0)
+        pn = WienerPhaseNoise(model,σ2,seed,0,0)
     elseif model == :None 
-        pn = NoPhaseNoise()
+        pn = NoPhaseNoise(model)
     else
         @error "Unknown Phase noise model" 
     end

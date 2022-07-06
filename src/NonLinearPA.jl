@@ -6,6 +6,7 @@ abstract type PowerAmplifier end
 
 # Rapp type 
 struct Rapp_PowerAmplier <: PowerAmplifier
+    name::Symbol
     power::Float64              # Theoretical power: -1 use empirical power measure
     backOff::Float64            # Backoff for saturation 
     smoothness::Float64         # Smoothness
@@ -14,6 +15,7 @@ end
 
 # Saleh type 
 struct Saleh_PowerAmplifier <: PowerAmplifier
+    name::Symbol
     α_AM::Float64
     β_AM::Float64
     α_PM::Float64
@@ -22,6 +24,7 @@ end
 
 # Ghorbani type 
 struct Ghorbani_PowerAmplifier <: PowerAmplifier 
+    name::Symbol
     a1::Float64
     a2::Float64
     a3::Float64
@@ -34,6 +37,7 @@ end
 
 
 struct Linear_PowerAmplifier <: PowerAmplifier
+    name::Symbol
     linearGain::Float64
 end
 
@@ -74,13 +78,13 @@ function initNonLinearPA(model::Symbol;power=-1,backOff=0,smoothness=0,α_AM=1,�
         # --- Rapp model 
         # ---------------------------------------------------- 
         saturation = 10^(backOff/20)
-        pa = Rapp_PowerAmplier(power,backOff,smoothness,saturation)
+        pa = Rapp_PowerAmplier(model,power,backOff,smoothness,saturation)
     elseif model == :Saleh
-        pa = Saleh_PowerAmplifier(α_AM,β_AM,α_PM,β_PM)
+        pa = Saleh_PowerAmplifier(model,α_AM,β_AM,α_PM,β_PM)
     elseif model == :Ghorbani
-        pa = Ghorbani_PowerAmplifier(a1,a2,a3,a4,b1,b2,b3,b4)
+        pa = Ghorbani_PowerAmplifier(model,a1,a2,a3,a4,b1,b2,b3,b4)
     elseif model == :Linear
-        pa = Linear_PowerAmplifier(linearGain)
+        pa = Linear_PowerAmplifier(model,linearGain)
     else 
         @error "Unknown Power Amplifier model"
     end
