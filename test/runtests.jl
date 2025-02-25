@@ -8,24 +8,24 @@ using DSP
     N = 2048
     x = randn(ComplexF64,N)
     # --- Unity transform 
-    y = addIQMismatch(x,-Inf,0)
+    y = addIQMismatch(x,0,0)
     @test y isa Vector{ComplexF64}
     @test length(y) === length(x)
     @test y == x # model is 0, y == x 
     # 
-    y = addIQMismatch(x,0,0)
+    y = addIQMismatch(x,3,0)
     @test y isa Vector{ComplexF64}
     @test length(y) === length(x)
-    @test y == 1/2*real(x)+3im/2*imag(x) # model is 0, y == x 
-
+    @test isapprox(mean(abs.(real(y) ./ real(x))) , 4/3;atol=0.05)
+    @test isapprox(mean(abs.(imag(y) ./ imag(x))) , 2/3;atol=0.05)
     # In place 
     x2 = deepcopy(x)
-    addIQMismatch!(x,-Inf,0)
+    addIQMismatch!(x,0,0)
     @test x isa Vector{ComplexF64}
     @test all(x .== x2)
 
     # Using struct 
-    iqMismatch = initIQMismatch(-Inf,0)
+    iqMismatch = initIQMismatch(0,0)
     addIQMismatch!(x,iqMismatch)
 end
 

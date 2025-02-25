@@ -18,7 +18,10 @@ initIQMismatch(g,ϕ)
 function initIQMismatch(g,ϕ)
     # --- Gain managment 
     glin = db_to_linear(g)
-    gI,gQ = 1-glin/2,1+glin/2
+    # --- From linear gain, get the energy spread 
+    k = (1-glin)/(1+glin)
+    # --- Then 
+    gI,gQ = 1-k,1+k
     # Split phase for I and Q paths
     ϕI,ϕQ = ϕ/2,ϕ/2
     # Matrix (tuple for sp44d)
